@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import './sign-in.scss'
 import FormInput from '../form-input/form-input'
 import CustomButton from '../custom-button/custom-button'
+import { signInWithGoogle } from '../../firebase/firebase.utils'
 
 const SignIn = () => {
   const [state, setState] = useState({
@@ -41,7 +42,16 @@ const SignIn = () => {
           handleChange={handleChange}
           label={'Password'}
         />
-        <CustomButton type={'submit'}>SIGN IN</CustomButton>
+        <div className={'buttons'}>
+          <CustomButton type={'submit'}>SIGN IN</CustomButton>
+          <CustomButton
+            onClick={signInWithGoogle}
+            type={'button'}
+            isGoogleSignIn={true}
+          >
+            SIGN IN WITH GOOGLE
+          </CustomButton>
+        </div>
       </form>
     </div>
   )
