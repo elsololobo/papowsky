@@ -9,7 +9,7 @@ const SignIn = () => {
     email: '',
     password: '',
   })
-  const [email, password] = state
+  const { email, password } = state
 
   const handleSubmit = async (event) => {
     event.preventDefault()
