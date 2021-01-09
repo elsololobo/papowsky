@@ -1,21 +1,28 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import './sign-in.scss'
 import FormInput from '../form-input/form-input'
 import CustomButton from '../custom-button/custom-button'
-import { signInWithGoogle } from '../../firebase/firebase.utils'
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils'
 
 const SignIn = () => {
   const [state, setState] = useState({
     email: '',
     password: '',
   })
-  const handleSubmit = useCallback((event) => {
+  const [email, password] = state
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    setState({
-      email: '',
-      password: '',
-    })
-  }, [])
+    try {
+      await auth.signInWithEmailAndPassword(email, password)
+      setState({
+        email: '',
+        password: '',
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const handleChange = (event) => {
     const { value, name } = event.target
