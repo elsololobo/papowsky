@@ -11,13 +11,17 @@ const config = {
   appId: '1:574871847375:web:d6040db47eaa7ad6d452ba',
   measurementId: 'G-E0L58HQRLT',
 }
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return
+
   const userRef = firestore.doc(`users/${userAuth.uid}`)
+
   const snapShot = await userRef.get()
+
   if (!snapShot.exists) {
     const { displayName, email } = userAuth
-    const createdAt = new Date()
+    const createdAt = Date.now()
 
     try {
       await userRef.set({
@@ -27,11 +31,13 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         ...additionalData,
       })
     } catch (error) {
-      console.log('error creation', error.message)
+      console.log('error creating user', error.message)
     }
   }
+
   return userRef
 }
+
 firebase.initializeApp(config)
 
 export const auth = firebase.auth()
@@ -40,4 +46,5 @@ export const firestore = firebase.firestore()
 const provider = new firebase.auth.GoogleAuthProvider()
 provider.setCustomParameters({ prompt: 'select_account' })
 export const signInWithGoogle = () => auth.signInWithPopup(provider)
+
 export default firebase
