@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 import { auth } from '../../firebase/firebase.utils'
 import { useSelector } from 'react-redux'
+import CartIcon from '../cart-icon/cart-icon'
+import CartDropdown from '../cart-dropdown/cart-dropdown'
 
 const Header = () => {
-  const currentUser = useSelector((state) => state.user.currentUser)
+  const { currentUser, hidden } = useSelector((state) => ({
+    currentUser: state.user.currentUser,
+    hidden: state.cart.hidden,
+  }))
   return (
     <div className={'header'}>
       <Link className={'logo-container'} to={'/'}>
@@ -28,7 +33,9 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {hidden ? null : <CartDropdown />}
     </div>
   )
 }

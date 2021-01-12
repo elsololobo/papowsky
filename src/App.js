@@ -1,7 +1,7 @@
 import './App.css'
 import Home from './pages/home/home'
 import React, { useEffect } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import Shop from './pages/shop/shop'
 import Header from './components/header/header'
 import Login from './pages/login/login'
