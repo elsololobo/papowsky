@@ -1,8 +1,9 @@
 import React from 'react'
 import './menu-item.scss'
-import { withRouter } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
-const MenuItem = ({ title, imageUrl, size, history, linkUrl }) => {
+const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
+  const history = useHistory()
   return (
     <div className={`${size} menu-item`} onClick={() => history.push(linkUrl)}>
       <div
@@ -16,4 +17,4 @@ const MenuItem = ({ title, imageUrl, size, history, linkUrl }) => {
     </div>
   )
 }
-export default withRouter(MenuItem)
+export default MenuItem

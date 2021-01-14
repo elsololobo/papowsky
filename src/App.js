@@ -8,10 +8,12 @@ import Login from './pages/login/login'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentUser } from './redux/slices/userSlice'
+import { selectCurrentUser } from './redux/selectors/user.selector'
+import CheckoutPage from './pages/checkout/checkout'
 
 function App() {
   const dispatch = useDispatch()
-  const currentUser = useSelector((state) => state.user.currentUser)
+  const currentUser = useSelector(selectCurrentUser)
 
   useEffect(() => {
     let unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -31,6 +33,7 @@ function App() {
       <Switch>
         <Route exact={true} path={'/'} component={Home} />
         <Route exact={true} path={'/shop'} component={Shop} />
+        <Route exact={true} path={'/checkout'} component={CheckoutPage} />
         <Route
           exact={true}
           path={'/sign-in'}
