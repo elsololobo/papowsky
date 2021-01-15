@@ -9,7 +9,7 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentUser } from './redux/slices/userSlice'
 import { selectCurrentUser } from './redux/selectors/user.selector'
-import CheckoutPage from './pages/checkout/checkout'
+import Checkout from './pages/checkout/checkout'
 
 function App() {
   const dispatch = useDispatch()
@@ -32,8 +32,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact={true} path={'/'} component={Home} />
-        <Route exact={true} path={'/shop'} component={Shop} />
-        <Route exact={true} path={'/checkout'} component={CheckoutPage} />
+        <Route path={'/shop'} component={Shop} />
+        <Route exact={true} path={'/checkout'} component={Checkout} />
         <Route
           exact={true}
           path={'/sign-in'}

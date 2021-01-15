@@ -12,7 +12,7 @@ const structuredSelector = createStructuredSelector({
   cartItems: selectCartItems,
   total: selectCartTotal,
 })
-const CheckoutPage = () => {
+const Checkout = () => {
   const { cartItems, total } = useSelector(structuredSelector)
   return (
     <div className={'checkout-page'}>
@@ -43,4 +43,4 @@ const CheckoutPage = () => {
   )
 }
 
-export default CheckoutPage
+export default Checkout
