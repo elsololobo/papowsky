@@ -33,17 +33,20 @@ const persistConfig = {
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
-
+const middlewares = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+]
+// eslint-disable-next-line no-undef
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(logger)
+}
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: [
-    logger,
-    ...getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-  ],
+  middleware: middlewares,
 })
 
 export const persistor = persistStore(store)
